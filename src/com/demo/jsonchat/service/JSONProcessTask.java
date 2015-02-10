@@ -53,8 +53,9 @@ public class JSONProcessTask implements Runnable{
 		}
 	}
 	
-	private void processLink(String message, ChatDataBuilder dataBuilder) {
-		Matcher linkMatcher = Patterns.WEB_URL.matcher(message);
+	private void processLink(String message, ChatDataBuilder dataBuilder){
+		String urlStr = message.toLowerCase();
+		Matcher linkMatcher = Patterns.WEB_URL.matcher(urlStr);
 		while(linkMatcher.find()){
 		    String url = linkMatcher.group();
 			String title = processTitle(url);
