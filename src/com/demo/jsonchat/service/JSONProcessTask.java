@@ -1,10 +1,6 @@
 package com.demo.jsonchat.service;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -12,6 +8,7 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import android.util.Log;
 import android.util.Patterns;
@@ -74,39 +71,23 @@ public class JSONProcessTask implements Runnable{
 	}
 	
 	private String processTitle(String urlStr){
-		BufferedReader bufferReader = null;
-		try {
-			HttpClient client = new DefaultHttpClient();
-			HttpGet request = new HttpGet(urlStr);
-			HttpResponse response = client.execute(request);
-
-			InputStream in = response.getEntity().getContent();
-			bufferReader = new BufferedReader(
-					new InputStreamReader(in));
-			StringBuilder sb = new StringBuilder();
-			String line = null;
-			while ((line = bufferReader.readLine()) != null) {
-				sb.append(line);
-			}
-			in.close();
-			return parseTitle(sb.toString());
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			Log.w(TAG, e.toString());
-		}catch (IOException e) {
-			// TODO Auto-generated catch block
-			Log.w(TAG, e.toString());
-		}finally {
-            if(bufferReader != null){
-                try {
-					bufferReader.close();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					Log.w(TAG, e.toString());
-				}
+		HttpResponse response = null;
+        HttpGet httpGet = null;
+        HttpClient mHttpClient = null;
+        String s = "";
+        try {
+            if(mHttpClient == null){
+                mHttpClient = new DefaultHttpClient();
             }
+            httpGet = new HttpGet(urlStr);
+            response = mHttpClient.execute(httpGet);
+            s = EntityUtils.toString(response.getEntity(), "UTF-8");
+        } catch (IOException e) {
+            Log.w(TAG, e.toString());
+        } catch (Exception e){
+        	Log.w(TAG, e.toString());
         }
-		return "";
+        return parseTitle(s);
 	}
 }
 
