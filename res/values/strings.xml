@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- App name and screen titles -->
+    <string name="app_name">JSON Chat</string>
+    <string name="menu_close_chat">Close chat</string>
+    <string name="menu_send_a_message">Send a message</string>
+</resources>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+    <style name="JsonchatTheme" parent="@android:style/Theme.Holo.Light">
+        <item name="android:actionBarStyle">@style/JsonChatTheme.JsonChatActionBarStyle</item>
+    </style>
+
+    <style name="JsonChatTheme.JsonChatActionBarStyle" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/actionbar_background_color</item>
+        <item name="android:titleTextStyle">@style/JsonChatTheme.JsonChatActionBarTheme.TitleTextStyle</item>
+    </style>
+    
+    <style name="JsonChatTheme.JsonChatActionBarTheme.TitleTextStyle" parent="@android:style/TextAppearance.Holo.Widget.ActionBar.Title">
+    	<item name="android:textColor">@color/actionbar_text</item>
+  	</style>
+</resources>
